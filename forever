@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+
+from subprocess import Popen, PIPE
+import sys
+import time
+from twilio.rest import Client
+
+###### Twilio
+# Your Account SID from twilio.com/console
+account_sid = "ACc8f6d44518086b3e6c1b8ba64926145d"
+# Your Auth Token from twilio.com/console
+auth_token  = "08700f4e90297148bf833341ed9d81e7"
+
+twilio_to = "+14084649963"
+twilio_from = "+14086693353"
+twilio_client = Client(account_sid, auth_token)
+
+
+filename = sys.argv[1]
+count=0
+while True:
+    if count==0:
+        message = twilio_client.messages.create(
+            to=twilio_to,
+            from_=twilio_from,
+            body="{0}: {1}".format("poolcontroller-manager", "Starting up for first time."))
+
+    elif count < 5:
+        message = twilio_client.messages.create(
+            to=twilio_to,
+            from_=twilio_from,
+            body="{0}: {1}".format("poolcontroller-manager", "Crashed! restarting..."))
+    elif count == 5: #in case we have repetitive crashes, at least slow down the alerts
+        message = twilio_client.messages.create(
+            to=twilio_to,
+            from_=twilio_from,
+            body="{0}: {1}".format("poolcontroller-manager", "Crashed! restarting... will slow down restarts.  Somethings wrong."))
+    count += 1
+    print("\nStarting " + filename)
+    p = Popen(["python",filename], stdout=PIPE)
+    output = p.communicate()[0]
+    print output
+    if count >= 5:
+        time.sleep(count*60)
+    p.wait()

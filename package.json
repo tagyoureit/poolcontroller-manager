@@ -1,7 +1,7 @@
 {
   "name": "poolcontroller-manager",
   "version": "1.0.0",
-  "description": "Application to supplement nodejs-poolcontroller and manage/monitor filter PSI, ph/ORP readings, and dosing of acid/chlorine (aka bleach)",
+  "description": "Application to supplement nodejs-poolcontroller and manage/monitor filter PSI, ph/ORP readings, and dosing of acid/chlorine",
   "main": "index.js",
   "scripts": {
     "start": "node ./src/bin/www",
@@ -35,15 +35,24 @@
   },
   "homepage": "https://github.com/tagyoureit/poolcontroller-manager#readme",
   "dependencies": {
-    "influx": "^5.0.7",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "~4.16.0",
-    "http-errors": "~1.6.2",
-    "morgan": "~1.9.0",
-    "pug": "2.0.0-beta11"
+    "axios": "^0.19.2",
+    "express": "^4.16.4",
+    "extend": "^3.0.2",
+    "raspi": "^6.0.1",
+    "raspi-gpio": "^6.2.2",
+    "raspi-i2c": "^6.2.4",
+    "raspi-kit-ads1x15": "^1.0.0",
+    "socket.io-client": "^2.3.0",
+    "source-map-support": "^0.5.19",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@types/socket.io": "^2.1.8",
+    "@types/express": "^4.17.7",
+    "@types/node": "^14.0.19",
+    "@types/raspi": "^5.0.0",
+    "@types/raspi-i2c": "^6.1.1",
+    "@types/socket.io-client": "^1.4.33",
     "nodemon": "^1.17.4"
   }
 }

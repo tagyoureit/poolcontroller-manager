@@ -1,0 +1,62 @@
+{
+    "web": {
+        "servers": {
+            "http": {
+                "enabled": true,
+                "ip": "0.0.0.0",
+                "port": 4205,
+                "httpsRedirect": false,
+                "authentication": "none",
+                "authFile": "/users.htpasswd"
+            },
+            "https": {
+                "enabled": false,
+                "ip": "127.0.0.1",
+                "port": 8081,
+                "authentication": "none",
+                "authFile": "/users.htpasswd",
+                "sslKeyFile": "",
+                "sslCertFile": ""
+            },
+            "mdns": {
+                "enabled": false
+            },
+            "sspd": {
+                "enabled": false
+            },
+            "services": {}
+        }
+    },
+    "log": {
+        "app": {
+            "enabled": true,
+            "level": "info"
+        }
+    },
+    "poolController": {
+        "protocol": "http://",
+        "server": "10.0.0.170",
+        "port": 4200
+    },
+    "devices": {
+        "orpProbe": {
+            "address": "0x62",
+            "delay": 1500
+        },
+        "phProbe": {
+            "address": "0x63",
+            "delay": 1500
+        },
+        "tank1": {
+            "sensorAddress": 21,
+            "pumpAddress": 23,
+            "type": "pH"
+        },
+        "tank2": {
+            "sensorAddress": 22,
+            "pumpAddress": 25,
+            "type": "orp"
+        }
+    },
+    "appVersion": "1.0.0"
+}

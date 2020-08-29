@@ -1,0 +1,37 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "copy to remote and run",
+            "type": "shell",
+            "command": "rsync -v -z -h -p --no-o --no-g  -r * pi@poolcontroller-001.local:/home/pi/poolcontroller-manager --exclude dist --exclude 'v2/data' --exclude node_modules --exclude pcenv --delete && ssh -2 -L 5678:localhost:5678 pi@poolcontroller-001.local 'killall python3 || true && chmod a+x /home/pi/poolcontroller-manager/scripts/runWithPython3.sh && /home/pi/poolcontroller-manager/scripts/runWithPython3.sh' && sleep 5",
+            "problemMatcher": []
+        },
+        {
+            "label": "copy to remote, compile, copy files back locally, and start node with debugger",
+            "type": "shell",
+            "command": "ssh pi@poolcontroller-001.local 'cd poolcontroller-manager; tsc'; rsync  -avzh  pi@poolcontroller-001.local:/home/pi/poolcontroller-manager/dist /Users/rgoldin/programming/poolcontroller-manager  --include-from includes; ssh pi@poolcontroller-001.local 'cd poolcontroller-manager; sudo killall node; sudo node --inspect-brk=0.0.0.0 dist/app.js'",
+            "problemMatcher": [],
+            "dependsOn": ["copy to remote"]
+        },
+        {
+            "label": "Copy and Build",
+            "dependsOn": ["copy to remote", "copy to remote, compile, copy files back locally"],
+            "dependsOrder": "sequence"
+        },
+        {
+            "label": "copy to remote",
+            "type": "shell",
+            "command": "rsync -v -z -h -p --no-o --no-g  -r * pi@poolcontroller-001.local:/home/pi/poolcontroller-manager --exclude out --exclude 'v2/data' --exclude node_modules --exclude pcenv --delete --exclude dist",
+            "problemMatcher": []
+        },
+        {
+            "label": "ssh to poolcontroller-001.local",
+            "type": "shell",
+            "command": "ssh pi@poolcontroller-001.local",
+            "problemMatcher": []
+        }
+    ]
+}

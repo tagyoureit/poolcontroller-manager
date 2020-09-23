@@ -74,11 +74,10 @@ const startAsync = async () => {
     }
 }
 
-startAsync();
-
+// NOTE: need to investigate shutting down cleanly likely because of one of the underlying dependencies
+process.stdin.resume();
 process.on('SIGINT', async function () {
     try {
-
         logger.info(`Received Ctrl-C.  Stopping pumps.`);
         controller.tankPumps.stopPumps();
         await state.stopAsync()
@@ -91,3 +90,5 @@ process.on('SIGINT', async function () {
         process.exit(1);
     }
 });
+
+startAsync();

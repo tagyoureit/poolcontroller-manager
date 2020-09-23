@@ -26,17 +26,17 @@ class TankPump {
         this.saveTankState = (tank) => {
             if (tank.type === 'pH')
                 if (tank.isOn) {
-                    tank.pHDosingStatus = State_1.state.chemController.options.dosingStatus.find(wf => wf.name === 'monitoring').val;
+                    tank.pHDosingStatus = State_1.state.chemController.options.dosingStatus.find(wf => wf.name === 'dosing').val;
                 }
                 else {
-                    tank.pHDosingStatus = State_1.state.chemController.options.dosingStatus.find(wf => wf.name === 'dosing').val;
+                    tank.pHDosingStatus = State_1.state.chemController.options.dosingStatus.find(wf => wf.name === 'monitoring').val;
                 }
             else if (tank.type === 'orp')
                 if (tank.isOn) {
-                    tank.orpDosingStatus = State_1.state.chemController.options.dosingStatus.find(wf => wf.name === 'monitoring').val;
+                    tank.orpDosingStatus = State_1.state.chemController.options.dosingStatus.find(wf => wf.name === 'dosing').val;
                 }
                 else {
-                    tank.orpDosingStatus = State_1.state.chemController.options.dosingStatus.find(wf => wf.name === 'dosing').val;
+                    tank.orpDosingStatus = State_1.state.chemController.options.dosingStatus.find(wf => wf.name === 'monitoring').val;
                 }
         };
         this.readSensor = (tank) => {

@@ -385,7 +385,7 @@ export class WarningsCollection extends EqState {
     public get pHDailyLimitReached(): number { return typeof this.data.pHDailyLimitReached === 'undefined' ? undefined : this.data.pHDailyLimitReached.val; }
     public set pHDailyLimitReached(val: number) {
         if (this.pHDailyLimitReached !== val) {
-            this.data.pHDailyLimitReached = state.chemController.options.warnings.pHTank.find(el => val === el.val);
+            this.data.pHDailyLimitReached = state.chemController.options.warnings.pHDailyLimitReached.find(el => val === el.val);
             state.updateServer = true;
         }
     }

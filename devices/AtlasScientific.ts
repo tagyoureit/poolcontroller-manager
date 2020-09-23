@@ -69,8 +69,8 @@ export class AtlasScientific {
                     let str2 = data.toString();
                     let num = parseFloat(str2.replace(/[^ -~]+/g, ""))
                     if (isNaN(num) || num === 0) {
-                        console.error(`Error: ${probe.type} - cannot convert ${data} to a number`);
-                        reject(`Error converting val to a number`)
+                        console.error(`Error: ${probe.type} - cannot convert ${JSON.stringify(data)} to a number`);
+                        reject(`Error converting val to a number.  Raw: ${JSON.stringify(data)}`)
                     }
                     else {
                         if (probe.type === 'pH'){

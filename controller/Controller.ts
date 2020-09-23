@@ -59,7 +59,12 @@ export class Controller {
             }, (5 - (new Date().getSeconds() % 5)) * 1000);
         }
         catch (err) {
-            logger.error(`Error in main loop: ${err}`)
+            console.log(new Date())
+            logger.error(`Error in main loop: ${err}`);
+            console.log(err)
+            controller.tankPumps.stopPumps();
+            await state.stopAsync();
+            process.exit(2);
         }
     }
 }
@@ -111,8 +116,8 @@ export class TankPumpCommands {
         let stank2 = state.tankPumps.getItemById(2);
         stank1.currentDailyRunMins = 0;
         stank2.currentDailyRunMins = 0;
-        state.chemController.warnings.orpDailyLimitReached = state.chemController.options.warnings.find(el => el.name === 'ok');
-        state.chemController.warnings.pHDailyLimitReached = state.chemController.options.warnings.find(el => el.name === 'ok');
+        state.chemController.warnings.orpDailyLimitReached = state.chemController.options.warnings.orpDailyLimitReached.find(el => el.name === 'ok');
+        state.chemController.warnings.pHDailyLimitReached = state.chemController.options.warnings.pHDailyLimitReached.find(el => el.name === 'ok');
     }
     public calcRunningTime = (tank: TankPumpState, bStop: boolean) => {
         if (typeof tank.lastStartTime !== 'undefined')

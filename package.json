@@ -36,7 +36,7 @@
   "homepage": "https://github.com/tagyoureit/poolcontroller-manager#readme",
   "dependencies": {
     "axios": "^0.19.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "extend": "^3.0.2",
     "raspi": "^6.0.1",
     "raspi-gpio": "^6.2.2",
